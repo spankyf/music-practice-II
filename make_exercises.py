@@ -7,6 +7,7 @@ import sys
 import time
 from operator import itemgetter
 from storage import insert_exercise
+from make_sound import play_finished, play_intermission
 
 # set to true if you don't want the exercises to actually wait  - 1 second elapse
 testing = False
@@ -78,9 +79,8 @@ def perform_exercise(duration, testing=testing):
     for minute in list(range(1, int(duration)+1)):
         print('          Minute %s / %s' % (minute, round(duration)))
         time.sleep(sleeptime)
-    sys.stdout.write('\a')
-    sys.stdout.flush()
     print()
+
     return duration
 
 
@@ -109,9 +109,12 @@ def schedule():
                 print("               Current %s to practice is %s" %
                       (exercise, ', '.join(interval)))
                 perform_exercise(time_division)
+                play_intermission()
 
         if not testing:
             insert_exercise(exercise, ex_list[exercise])
+
+        play_finished()
         keep_going = input('     Any key to continue, or hit x to quit')
         if keep_going.lower() == 'x':
             break

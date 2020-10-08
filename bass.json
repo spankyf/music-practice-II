@@ -1,8 +1,9 @@
 {
   "fretboard-knowledge": 3,
-  "scales": 10,
-  "triads": 20,
-  "chords": 10,
-  "hit-me-with-your-rhythm-stick": 5,
-  "autumn-leaves": 10
+  "scales": 5,
+  "triads": 7,
+  "chords": 7,
+  "hit-me-with-your-rhythm-stick": 3,
+  "dead-goon": 3,
+  "stella-by-starlight": 10
 }

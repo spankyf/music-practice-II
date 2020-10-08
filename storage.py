@@ -37,6 +37,7 @@ VALUES ( %s, %s, %s ) RETURNING exercise;"""
     finally:
         if connection is not None:
             connection.close()
+            print('     Logged to database')
 
     return record
 

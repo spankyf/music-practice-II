@@ -67,38 +67,48 @@ def make_sequences(params):
     return {'params': params, 'scales': scale, 'chords': chords, 'triads': triads}
 
 
-def log_exercise(duration, testing=testing):
+def perform_exercise(duration, testing=testing):
     # make system sound when done after seconds
-    if not testing:
-        duration *= 60
-    time.sleep(duration)
+    sleeptime = 1 if testing else 60
+
+    for minute in list(range(1, int(duration)+1)):
+        print('          Minute %s / %s' % (minute, round(duration)))
+        time.sleep(sleeptime)
     sys.stdout.write('\a')
     sys.stdout.flush()
+    print()
     return duration
 
 
 def schedule():
     data = make_sequences(params)
+
     with open('bass.json') as json_file:
         ex_list = json.load(json_file)
 
     for exercise in ex_list:
 
-        if exercise != 'chords' and exercise != 'triads':
-            print("Practice %s" % (exercise))
+        if exercise == 'scales':
+            print("               Practice %s - %s" %
+                  (params['mode'][0], ', '.join(data[exercise])))
 
-            duration = log_exercise(ex_list[exercise])
-            insert_exercise(exercise, duration)
+            perform_exercise(ex_list[exercise])
+
+        elif exercise != 'chords' and exercise != 'triads':
+            print("               Practice %s" % (exercise))
+
+            perform_exercise(ex_list[exercise])
 
         else:
             time_division = ex_list[exercise]/len(data[exercise])
             for interval in data[exercise]:
-                print("Current %s to practice is %s" %
+                print("               Current %s to practice is %s" %
                       (exercise, ', '.join(interval)))
-                duration = log_exercise(time_division)
-                insert_exercise(exercise, duration)
+                perform_exercise(time_division)
 
-        keep_going = input('Any key to continue, or hit x to quit')
+        if not testing:
+            insert_exercise(exercise, ex_list[exercise])
+        keep_going = input('     Any key to continue, or hit x to quit')
         if keep_going.lower() == 'x':
             break
     return

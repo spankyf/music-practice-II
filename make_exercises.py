@@ -9,7 +9,7 @@ from operator import itemgetter
 from storage import insert_exercise
 
 # set to true if you don't want the exercises to actually wait  - 1 second elapse
-testing = True
+testing = False
 
 
 keys = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#']

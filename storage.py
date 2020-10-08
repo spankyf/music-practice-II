@@ -25,7 +25,7 @@ VALUES ( %s, %s, %s ) RETURNING exercise;"""
 
         cur = connection.cursor()
         # execute the INSERT statement
-        cur.execute(sql, (today, exercise, '%s seconds' % duration,))
+        cur.execute(sql, (today, exercise, '%s minutes' % duration,))
         # get the generated id back
         record = cur.fetchone()[0]
         # commit the changes to the database

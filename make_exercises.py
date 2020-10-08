@@ -24,7 +24,8 @@ def reorder(note):
 
 def rearrange_indices(mode):
     temp_mode = mode[1:] + [12]
-    return list(map(lambda x: x - temp_mode[0], temp_mode))
+    new_mode = list(map(lambda x: x - temp_mode[0], temp_mode))
+    return new_mode
 
 
 with open('modes.json') as mode_file:
@@ -58,12 +59,15 @@ def make_sequences(params):
         if scale_degree == 0:
             chords.append(itemgetter(*[0, 2, 4, 6])(scale))
             triads.append(itemgetter(*[0, 2, 4])(scale))
+            mode_indices = params['mode'][1]
+
         else:
-            mode_indices = rearrange_indices(params['mode'][1])
+            mode_indices = rearrange_indices(mode_indices)
             current_mode = itemgetter(*mode_indices)(reorder(note))
 
             chords.append(itemgetter(*[0, 2, 4, 6])(current_mode))
             triads.append(itemgetter(*[0, 2, 4])(current_mode))
+
     return {'params': params, 'scales': scale, 'chords': chords, 'triads': triads}
 
 

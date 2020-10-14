@@ -113,6 +113,8 @@ def schedule():
                     perform_exercise(time_division)
                     play_intermission()
 
+            # print(exercise, instrument_exercises[ex_list][exercise], ex_list)
+
             if not testing:
                 insert_exercise(
                     exercise, instrument_exercises[ex_list][exercise], ex_list)

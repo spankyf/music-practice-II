@@ -87,37 +87,40 @@ def perform_exercise(duration, testing=testing):
 def schedule():
     data = make_sequences(params)
 
-    with open('bass.json') as json_file:
-        ex_list = json.load(json_file)
+    with open('exercises.json') as json_file:
+        instrument_exercises = json.load(json_file)
+    for ex_list in instrument_exercises:
+        print('     ********************')
+        print('     Instrument is %s' % ex_list)
+        for exercise in instrument_exercises[ex_list]:
+            if exercise == 'scales':
+                print("               Practice %s - %s" %
+                      (params['mode'][0], ', '.join(data[exercise])))
 
-    for exercise in ex_list:
+                perform_exercise(instrument_exercises[ex_list][exercise])
 
-        if exercise == 'scales':
-            print("               Practice %s - %s" %
-                  (params['mode'][0], ', '.join(data[exercise])))
+            elif exercise != 'chords' and exercise != 'triads':
+                print("               Practice %s" % (exercise))
 
-            perform_exercise(ex_list[exercise])
+                perform_exercise(instrument_exercises[ex_list][exercise])
 
-        elif exercise != 'chords' and exercise != 'triads':
-            print("               Practice %s" % (exercise))
+            else:
+                time_division = instrument_exercises[ex_list][exercise]/len(
+                    data[exercise])
+                for interval in data[exercise]:
+                    print("               Current %s to practice is %s" %
+                          (exercise, ', '.join(interval)))
+                    perform_exercise(time_division)
+                    play_intermission()
 
-            perform_exercise(ex_list[exercise])
+            if not testing:
+                insert_exercise(
+                    exercise, instrument_exercises[ex_list][exercise], ex_list)
 
-        else:
-            time_division = ex_list[exercise]/len(data[exercise])
-            for interval in data[exercise]:
-                print("               Current %s to practice is %s" %
-                      (exercise, ', '.join(interval)))
-                perform_exercise(time_division)
-                play_intermission()
-
-        if not testing:
-            insert_exercise(exercise, ex_list[exercise])
-
-        play_finished()
-        keep_going = input('     Any key to continue, or hit x to quit')
-        if keep_going.lower() == 'x':
-            break
+            play_finished()
+            keep_going = input('     Any key to continue, or hit x to quit')
+            if keep_going.lower() == 'x':
+                break
     return
 
 

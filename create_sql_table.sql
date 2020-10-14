@@ -2,7 +2,8 @@ CREATE TABLE bass (
 	id SERIAL PRIMARY KEY,
 	date DATE NOT NULL,
 	exercise VARCHAR ( 50 ) NOT NULL,
-	duration INTERVAL  NOT NULL
+	duration INTERVAL  NOT NULL,
+	instrument VARCHAR(50) NOT NULL
 	
 );
 

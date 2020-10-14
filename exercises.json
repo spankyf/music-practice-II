@@ -1,0 +1,26 @@
+{"bass": {
+    "fretboard-knowledge": 3,
+    "scales": 5,
+    "triads": 7,
+    "chords": 7,
+    "hit-me-with-your-rhythm-stick": 3,
+    "dead-goon": 3,
+    "stella-by-starlight": 10
+  },
+  "piano":{
+    "scales": 5,
+    "spread-triads": 7,
+    "chords": 7,
+    "mikrokosmos":15
+  },
+  "lyrics":{
+    "free-writing-random-subject":10,
+    "metaphor-exercises":10
+  },
+  "guitar":{
+    "spread-triads": 7,
+    "chords": 7,
+    "pentatonics":15
+  }
+  
+  }
